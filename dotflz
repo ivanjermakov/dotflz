@@ -4,7 +4,7 @@ import click
 from parser import *
 
 
-Idef _setup(config_path):
+def _setup(config_path):
     click.echo(f'Config file: {config_path}')
     entries = parse_config(config_path)
     click.echo('[\n' + '\n'.join('\t{}'.format(e) for _, e in enumerate(entries)) + '\n]')
