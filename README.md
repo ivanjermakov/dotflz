@@ -1,2 +1,2 @@
 # dotflz
-Utility to keep dotfiles in one place
+Utility to keep copies of dotfiles in one place
