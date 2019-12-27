@@ -4,9 +4,14 @@ import click
 from parser import *
 
 
-@click.command()
+@click.group('dotflz')
+def dotflz():
+    pass
+
+
+@dotflz.command(help='Copy files by specified configuration file')
 @click.argument('config_path')
-def dotflz(config_path):
+def copy(config_path):
     click.echo(f'config file: {config_path}')
     entries = parse_config(config_path)
     click.echo('[\n' + '\n'.join('\t{}'.format(e) for _, e in enumerate(entries)) + '\n]')
