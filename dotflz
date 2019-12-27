@@ -4,19 +4,43 @@ import click
 from parser import *
 
 
+Idef _setup(config_path):
+    click.echo(f'Config file: {config_path}')
+    entries = parse_config(config_path)
+    click.echo('[\n' + '\n'.join('\t{}'.format(e) for _, e in enumerate(entries)) + '\n]')
+    return entries
+
+
 @click.group('dotflz')
 def dotflz():
     pass
 
 
-@dotflz.command(help='Copy files by specified configuration file')
+@dotflz.command(short_help='Copy files by specified configuration file')
 @click.argument('config_path')
 def copy(config_path):
-    click.echo(f'config file: {config_path}')
-    entries = parse_config(config_path)
-    click.echo('[\n' + '\n'.join('\t{}'.format(e) for _, e in enumerate(entries)) + '\n]')
+    """
+    Copy files by specified configuration file located in CONFIG_PATH
+    """
+    entries = _setup(config_path)
     for entry in entries:
         entry.copy()
+
+
+@dotflz.command(short_help='Verify configuration file')
+@click.argument('config_path')
+def verify(config_path):
+    """
+    Verify configuration file located in CONFIG_PATH
+    """
+    entries = _setup(config_path)
+    are_files_valid = []
+    for entry in entries:
+        are_files_valid.append(entry.is_valid())
+    error_count = len(list(filter(lambda e: not e, are_files_valid)))
+    click.echo(f'verification complete with {error_count} error{"" if error_count == 1 else "s"}')
+    if error_count != 0:
+        exit(1)
 
 
 dotflz()
