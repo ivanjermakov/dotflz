@@ -1,11 +1,14 @@
 import yaml
 
-from copy_config import CopyConfig
+from config import *
 
 
 def parse_config(path):
     with open(path, 'r') as stream:
-        entries = []
-        for name, entry_dict in yaml.safe_load(stream).items():
-            entries.append(CopyConfig(name, entry_dict))
-        return entries
+        items = []
+        config = yaml.safe_load(stream)
+        config_name = list(config.keys())[0]
+        config_items = list(config.values())[0].items()
+        for name, item_config in config_items:
+            items.append(ConfigItem(name, item_config, config_name))
+        return Config(config_name, items)

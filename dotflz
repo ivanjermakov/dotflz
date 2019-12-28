@@ -1,14 +1,13 @@
 #!/usr/bin/env python3
-import click
 
 from parser import *
 
 
 def _setup(config_path):
     click.echo(f'Config file: {config_path}')
-    entries = parse_config(config_path)
-    click.echo('[\n' + '\n'.join('\t{}'.format(e) for _, e in enumerate(entries)) + '\n]')
-    return entries
+    config = parse_config(config_path)
+    click.echo('[\n' + '\n'.join('\t{}'.format(e) for _, e in enumerate(config.items)) + '\n]')
+    return config
 
 
 @click.group('dotflz')
@@ -18,13 +17,16 @@ def dotflz():
 
 @dotflz.command(short_help='Copy files by specified configuration file')
 @click.argument('config_path')
-def copy(config_path):
+@click.option('-c', '--clean', is_flag=True, help='Delete files missing from config file.')
+def copy(config_path, clean):
     """
     Copy files by specified configuration file located in CONFIG_PATH
     """
-    entries = _setup(config_path)
-    for entry in entries:
-        entry.copy()
+    config = _setup(config_path)
+    if clean:
+        config.clean()
+    for item in config.items:
+        item.copy()
 
 
 @dotflz.command(short_help='Verify configuration file')
@@ -33,9 +35,9 @@ def verify(config_path):
     """
     Verify configuration file located in CONFIG_PATH
     """
-    entries = _setup(config_path)
+    config = _setup(config_path)
     are_files_valid = []
-    for entry in entries:
+    for entry in config.items:
         are_files_valid.append(entry.is_valid())
     error_count = len(list(filter(lambda e: not e, are_files_valid)))
     click.echo(f'verification complete with {error_count} error{"" if error_count == 1 else "s"}')

@@ -4,13 +4,25 @@ import subprocess
 import click
 
 
-class CopyConfig:
-    def __init__(self, name, entry_dict):
+class Config:
+    def __init__(self, name, items):
+        self.name = name
+        self.items = items
+        os.makedirs(self.name, exist_ok=True)
+
+    def clean(self):
+        click.echo(f'Cleaning folder {self.name}')
+        subprocess.run(['bash', '-c', " ".join(['rm', '-r', self.name])], check=True)
+
+
+class ConfigItem:
+    def __init__(self, name, entry_dict, config_name):
         self.name = name
         self.frm = os.path.expanduser(entry_dict['from'])
         self.to = os.path.expanduser(entry_dict['to']) if entry_dict.get('to') else name + '/'
         files_ = entry_dict['files']
         self.files = files_ if isinstance(files_, list) else [files_]
+        self.config_name = config_name
 
     def __repr__(self):
         return f'{self.name}: {self.frm} -> {self.to} | {self.files}'
@@ -32,7 +44,7 @@ class CopyConfig:
         return all(are_files_exist)
 
     def mkdir(self):
-        os.makedirs(self.to, exist_ok=True)
+        os.makedirs(self.config_name + self.to, exist_ok=True)
 
     def copy_file(self, file_path):
-        subprocess.run(['bash', '-c', " ".join(['cp', self.frm + file_path, self.to])])
+        subprocess.run(['bash', '-c', " ".join(['cp', self.frm + file_path, self.config_name + self.to])])
