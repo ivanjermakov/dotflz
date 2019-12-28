@@ -1,0 +1,20 @@
+# all files will be placed in the following directory
+dotfiles/:
+  # logical file group name
+  i3:
+    # common location path of files within group
+    from:
+      ~/.config/i3/
+    # destination directory (in this case: dotfiles/i3/)
+    to:
+      i3/
+    # files to copy (should be a list)
+    files:
+      # this file will be copied from ~/.config/i3/ to dotfiles/i3/
+      - config
+      - init
+  vim:
+    from:
+      ~/
+    files:
+      - .vimrc
