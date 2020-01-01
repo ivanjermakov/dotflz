@@ -4,15 +4,21 @@ import subprocess
 import click
 
 
+def delete_file(name):
+    subprocess.run(['bash', '-c', " ".join(['rm', '-r', name])], check=True)
+
+
+def copy_file(from_path, to_path):
+    click.echo('Copying file: {} -> {}'.format(from_path, to_path))
+    os.makedirs(to_path, exist_ok=True)
+    subprocess.run(['bash', '-c', " ".join(['cp', from_path, to_path])])
+
+
 class Config:
     def __init__(self, name, items):
         self.name = name
         self.items = items
         os.makedirs(self.name, exist_ok=True)
-
-    def clean(self):
-        click.echo(f'Cleaning folder {self.name}')
-        subprocess.run(['bash', '-c', " ".join(['rm', '-r', self.name])], check=True)
 
 
 class ConfigItem:
@@ -30,8 +36,11 @@ class ConfigItem:
     def copy(self):
         self.mkdir()
         for f in self.files:
-            click.echo(f'Copying file {f}')
-            self.copy_file(f)
+            copy_file(self.frm + f, self.config_name + self.to)
+
+    def paste(self):
+        for f in self.files:
+            copy_file(self.config_name + self.to + f, self.frm)
 
     def is_valid(self):
         are_files_exist = []
@@ -45,6 +54,3 @@ class ConfigItem:
 
     def mkdir(self):
         os.makedirs(self.config_name + self.to, exist_ok=True)
-
-    def copy_file(self, file_path):
-        subprocess.run(['bash', '-c', " ".join(['cp', self.frm + file_path, self.config_name + self.to])])
