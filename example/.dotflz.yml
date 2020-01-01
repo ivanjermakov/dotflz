@@ -3,9 +3,11 @@ dotfiles/:
   # logical file group name
   i3:
     # common location path of files within group
+    # preferably absolute path
     from:
       ~/.config/i3/
     # destination directory (in this case: dotfiles/i3/)
+    # preferably relative path (relative to dotfiles repository itself)
     to:
       i3/
     # files to copy (should be a list)
