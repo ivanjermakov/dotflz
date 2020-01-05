@@ -1,3 +1,5 @@
+![ASCII art](https://sun9-30.userapi.com/c853628/v853628642/15d5ac/OLBRQhGJb00.jpg)
+
 # dotflz
 Utility to keep copies of dotfiles in one some place
 
