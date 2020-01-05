@@ -34,3 +34,5 @@ Commands:
   restore  Restore original files with specified backup directory.
   verify   Verify configuration file.
 ````
+
+Example configurations can be found [here](https://github.com/ivanjermakov/dotflz/tree/master/example)
