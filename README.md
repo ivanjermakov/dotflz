@@ -12,7 +12,11 @@ Pyhton 3
     git clone https://github.com/ivanjermakov/dotflz.git
     cd dotflz
     ```
- 2. Optionally add `dotflz` to PATH.
+ 2. Mark `dotflz` as executable
+    ```shell script
+    chmod +x dotflz
+    ```
+ 3. Optionally add `dotflz` to PATH.
 
 ### Usage
 ````
