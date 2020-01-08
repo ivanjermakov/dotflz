@@ -4,7 +4,12 @@ from datetime import datetime
 from parser import *
 
 
-def _setup(config_path):
+def _parse_config(config_path):
+    """
+    Parser wrapper with echoing
+    :param config_path:
+    :return:
+    """
     click.echo(f'Config file: {config_path}')
     config = parse_config(config_path)
     click.echo('[\n' + '\n'.join('\t{}'.format(e) for _, e in enumerate(config.items)) + '\n]')
@@ -26,7 +31,7 @@ def copy(config_path, clean):
     """
     Copy files by according to CONFIG_PATH config file.
     """
-    config = _setup(config_path)
+    config = _parse_config(config_path)
     if clean:
         click.echo(f'Cleaning folder {config.name}')
         delete_file(config.name)
@@ -40,7 +45,7 @@ def paste(config_path):
     """
     Replace original files with ones from configured directory according to CONFIG_PATH config file.
     """
-    config = _setup(config_path)
+    config = _parse_config(config_path)
     for item in config.items:
         item.paste()
 
@@ -51,7 +56,7 @@ def verify(config_path):
     """
     Verify configuration file from CONFIG_PATH.
     """
-    config = _setup(config_path)
+    config = _parse_config(config_path)
     are_files_valid = []
     for entry in config.items:
         are_files_valid.append(entry.is_valid())
@@ -69,7 +74,7 @@ def backup(config_path, dir, clean):
     """
     Backup original files into backup directory according to CONFIG_PATH config file.
     """
-    config = _setup(config_path)
+    config = _parse_config(config_path)
     backup_dir_name = dir if dir else datetime.now().strftime('%Y-%m-%dT%H:%M:%S')
     if clean:
         click.echo(f'Cleaning folder {dir}')
@@ -86,7 +91,7 @@ def restore(config_path, backup_dir_name):
     """
     Restore original files from BACKUP_DIR_NAME according to CONFIG_PATH config file.
     """
-    config = _setup(config_path)
+    config = _parse_config(config_path)
     for item in config.items:
         for file in item.files:
             copy_file('{}/{}{}'.format(backup_dir_name, item.to, file), item.frm)

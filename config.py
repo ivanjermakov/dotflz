@@ -22,12 +22,19 @@ class Config:
 
 
 class ConfigItem:
-    def __init__(self, name, entry_dict, config_name):
+    def __init__(self, name, frm, to, files, config_name):
+        """
+        Constructor
+        :param name: configuration item name
+        :param frm: source directory
+        :param to: destination directory
+        :param files: list of source files within source directory
+        :param config_name: name of config
+        """
         self.name = name
-        self.frm = os.path.expanduser(entry_dict['from'])
-        self.to = os.path.expanduser(entry_dict['to']) if entry_dict.get('to') else name + '/'
-        files_ = entry_dict['files']
-        self.files = files_ if isinstance(files_, list) else [files_]
+        self.frm = frm
+        self.to = to
+        self.files = files
         self.config_name = config_name
 
     def __repr__(self):
