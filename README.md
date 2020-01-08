@@ -35,4 +35,4 @@ Commands:
   verify   Verify configuration file.
 ````
 
-Example configurations can be found [here](https://github.com/ivanjermakov/dotflz/tree/master/example)
+Example configurations can be found [here](https://github.com/ivanjermakov/dotflz/tree/master/example).
