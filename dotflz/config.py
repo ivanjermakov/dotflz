@@ -31,7 +31,7 @@ class ConfigItem:
         return f'{self.name}: {self.frm} -> {self.to} | {self.files}'
 
     def copy(self):
-        mkdir(self.config_name + self.to)
+        create_directory(self.config_name + self.to)
         for f in self.files:
             copy_file(self.frm + f, self.config_name + self.to)
 

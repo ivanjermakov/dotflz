@@ -4,8 +4,15 @@ import subprocess
 import click
 
 
-def delete_file(name):
-    subprocess.run(['bash', '-c', " ".join(['rm', '-r', name])], check=True)
+def delete_file(path):
+    click.echo('Deleting file: {}'.format(path))
+    subprocess.run(['bash', '-c', " ".join(['rm', '-r', path])], check=True)
+
+
+def create_file(path):
+    click.echo('Creating file: {}'.format(path))
+    os.makedirs(path, exist_ok=True)
+    subprocess.run(['bash', '-c', " ".join(['touch', path])])
 
 
 def copy_file(from_path, to_path):
@@ -14,5 +21,6 @@ def copy_file(from_path, to_path):
     subprocess.run(['bash', '-c', " ".join(['cp', from_path, to_path])])
 
 
-def mkdir(path):
+def create_directory(path):
+    click.echo('Creating directory: {}'.format(path))
     os.makedirs(path, exist_ok=True)
