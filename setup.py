@@ -6,7 +6,7 @@ with open('README.md') as f:
 
 setup(
     name='dotflz',
-    version='0.1',
+    version='0.2',
     packages=['dotflz'],
     url='https://github.com/ivanjermakov/dotflz',
     license='MIT',
