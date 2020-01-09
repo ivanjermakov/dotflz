@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
-from dotflz.dotflz import dotflz
 
-dotflz()
+if __name__ == '__main__':
+    from dotflz.dotflz import dotflz
+
+    dotflz()
