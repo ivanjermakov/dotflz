@@ -1,4 +1,5 @@
-RESOURCES_PATH = 'resources/'
+TEST_PATH = 'test/'
+RESOURCES_PATH = TEST_PATH + 'resources/'
 DYN_TEST_DIR_PATH = RESOURCES_PATH + 'dynamic/'
 TEST_DIR_PATH = RESOURCES_PATH + 'test_dir/'
 CONFIG_DIR_PATH = RESOURCES_PATH + 'config/'
