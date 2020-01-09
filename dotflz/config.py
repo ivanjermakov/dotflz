@@ -1,7 +1,7 @@
 import glob
 import itertools
 
-from filesystem import *
+from dotflz.filesystem import *
 
 
 class Config:

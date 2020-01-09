@@ -1,7 +1,6 @@
-#!/usr/bin/env python3
 from datetime import datetime
 
-from parser import *
+from dotflz.parser import *
 
 
 def _parse_config(config_path):
@@ -95,6 +94,3 @@ def restore(config_path, backup_dir_name):
     for item in config.items:
         for file in item.files:
             copy_file('{}/{}{}'.format(backup_dir_name, item.to, file), item.frm)
-
-
-dotflz()

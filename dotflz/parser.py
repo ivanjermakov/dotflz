@@ -1,6 +1,6 @@
 import yaml
 
-from config import *
+from dotflz.config import *
 
 
 def parse_config(path):
