@@ -2,6 +2,7 @@
 
 [![Travis (.com)](https://img.shields.io/travis/com/ivanjermakov/dotflz)](https://travis-ci.com/ivanjermakov/dotflz)
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/ivanjermakov/dotflz)](https://github.com/ivanjermakov/dotflz/releases)
+[![codecov](https://img.shields.io/codecov/c/gh/ivanjermakov/dotflz)](https://codecov.io/gh/ivanjermakov/dotflz)
 
 # dotflz
 Utility to keep copies of dotfiles in one place
