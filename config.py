@@ -1,17 +1,7 @@
-import os
-import subprocess
+import glob
+import itertools
 
-import click
-
-
-def delete_file(name):
-    subprocess.run(['bash', '-c', " ".join(['rm', '-r', name])], check=True)
-
-
-def copy_file(from_path, to_path):
-    click.echo('Copying file: {} -> {}'.format(from_path, to_path))
-    os.makedirs(to_path, exist_ok=True)
-    subprocess.run(['bash', '-c', " ".join(['cp', from_path, to_path])])
+from filesystem import *
 
 
 class Config:
@@ -34,14 +24,14 @@ class ConfigItem:
         self.name = name
         self.frm = frm
         self.to = to
-        self.files = files
+        self.files = self._check_mask(files)
         self.config_name = config_name
 
     def __repr__(self):
         return f'{self.name}: {self.frm} -> {self.to} | {self.files}'
 
     def copy(self):
-        self.mkdir()
+        mkdir(self.config_name + self.to)
         for f in self.files:
             copy_file(self.frm + f, self.config_name + self.to)
 
@@ -59,5 +49,25 @@ class ConfigItem:
             are_files_exist.append(is_f_exists)
         return all(are_files_exist)
 
-    def mkdir(self):
-        os.makedirs(self.config_name + self.to, exist_ok=True)
+    def _check_mask(self, files):
+        result = []
+        for f in files:
+            if '*' in f:
+                result = list(itertools.chain(
+                    result,
+                    self._find_by_mask(f)
+                ))
+            else:
+                result.append(f)
+        # remove duplicates
+        result = list(set(result))
+        return result
+
+    def _find_by_mask(self, file):
+        result = []
+        masked_files = glob.glob(self.frm + file)
+        masked_files = list(filter(lambda f: os.path.isfile(f), masked_files))
+        click.echo('mask: {} -> {}{}'.format(file, masked_files, '' if len(masked_files) != 0 else ' | no matches'))
+        for f in masked_files:
+            result.append(f.replace(self.frm, ''))
+        return result
