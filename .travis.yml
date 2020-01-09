@@ -6,3 +6,5 @@ before_script:
 script:
   - bin/dotflz
   - python -m unittest
+after_success:
+  - codecov -t
