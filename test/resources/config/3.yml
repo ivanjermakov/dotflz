@@ -1,0 +1,5 @@
+dotfiles/:
+  a:
+    from: a
+    to: a
+    files: []

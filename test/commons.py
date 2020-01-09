@@ -1,2 +1,4 @@
-DYN_TEST_DIR_PATH = 'dynamic/'
-TEST_DIR_PATH = 'test_dir/'
+RESOURCES_PATH = 'resources/'
+DYN_TEST_DIR_PATH = RESOURCES_PATH + 'dynamic/'
+TEST_DIR_PATH = RESOURCES_PATH + 'test_dir/'
+CONFIG_DIR_PATH = RESOURCES_PATH + 'config/'

@@ -1,0 +1,6 @@
+dotfiles/:
+  b:
+    from: b
+    files:
+      - c.html
+      - c.txt
