@@ -4,7 +4,7 @@
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/ivanjermakov/dotflz)
 
 # dotflz
-Utility to keep copies of dotfiles in one some place
+Utility to keep copies of dotfiles in one place
 
 ## Requirements
 Pyhton 3
