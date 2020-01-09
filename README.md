@@ -6,22 +6,30 @@
 # dotflz
 Utility to keep copies of dotfiles in one some place
 
-### Requirements
+## Requirements
 Pyhton 3
 
-### Installation
+## Installation
+
+### With PIP
+```shell script
+pip install dotflz
+```
+
+### From source
  1. Clone repository:
     ```shell script
     git clone https://github.com/ivanjermakov/dotflz.git
     cd dotflz
     ```
- 2. Mark `dotflz` as executable:
+ 2. Mark `bin/dotflz` as executable:
     ```shell script
-    chmod +x dotflz
+    chmod +x bin/dotflz
     ```
- 3. Optionally add `dotflz` to PATH.
 
-### Usage
+Optionally add `bin/dotflz` to PATH.
+
+## Usage
 ````
 Usage: dotflz [OPTIONS] COMMAND [ARGS]...
 
