@@ -1,7 +1,7 @@
 ![ASCII art](https://sun9-19.userapi.com/c857732/v857732190/13b709/A7LNzw5wGQA.jpg)
 
-![Travis (.com)](https://img.shields.io/travis/com/ivanjermakov/dotflz)
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/ivanjermakov/dotflz)
+[![Travis (.com)](https://img.shields.io/travis/com/ivanjermakov/dotflz)](https://travis-ci.com/ivanjermakov/dotflz)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/ivanjermakov/dotflz)](https://github.com/ivanjermakov/dotflz/releases)
 
 # dotflz
 Utility to keep copies of dotfiles in one place
