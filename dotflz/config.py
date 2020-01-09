@@ -60,7 +60,7 @@ class ConfigItem:
             else:
                 result.append(f)
         # remove duplicates
-        result = list(set(result))
+        result = list(sorted(set(result), key=result.index))
         return result
 
     def _find_by_mask(self, file):
