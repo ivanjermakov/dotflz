@@ -8,7 +8,7 @@ def parse_config(path):
         items = []
         config = yaml.safe_load(stream)
         config_name = list(config.keys())[0]
-        config_items = list(config.values())[0].items()
+        config_items = list(config.values())[0].items() if list(config.values())[0] else []
         for name, item_config in config_items:
             frm = os.path.expanduser(item_config['from'])
             to = os.path.expanduser(item_config['to']) if item_config.get('to') else name + '/'
