@@ -52,14 +52,10 @@ class ConfigItem:
     def _check_pattern(self, files):
         result = []
         for f in files:
-            # TODO: better way to differentiate pattern matching
-            if '*' in f:
-                result = list(itertools.chain(
-                    result,
-                    self._find_by_pattern(self.frm + f)
-                ))
-            else:
-                result.append(f)
+            result = list(itertools.chain(
+                result,
+                self._find_by_pattern(self.frm + f)
+            ))
         # remove duplicates
         result = list(sorted(set(result), key=result.index))
         return result
