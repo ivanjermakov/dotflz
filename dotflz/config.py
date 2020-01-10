@@ -24,7 +24,7 @@ class ConfigItem:
         self.name = name
         self.frm = frm
         self.to = to
-        self.files = self._check_mask(files)
+        self.files = self._check_pattern(files)
         self.config_name = config_name
 
     def __repr__(self):
@@ -49,13 +49,14 @@ class ConfigItem:
             are_files_exist.append(is_f_exists)
         return all(are_files_exist)
 
-    def _check_mask(self, files):
+    def _check_pattern(self, files):
         result = []
         for f in files:
+            # TODO: better way to differentiate pattern matching
             if '*' in f:
                 result = list(itertools.chain(
                     result,
-                    self._find_by_mask(f)
+                    self._find_by_pattern(self.frm + f)
                 ))
             else:
                 result.append(f)
@@ -63,11 +64,11 @@ class ConfigItem:
         result = list(sorted(set(result), key=result.index))
         return result
 
-    def _find_by_mask(self, file):
+    def _find_by_pattern(self, file):
         result = []
-        masked_files = glob.glob(self.frm + file)
+        masked_files = glob.glob(file, recursive=True)
         masked_files = list(filter(lambda f: os.path.isfile(f), masked_files))
-        click.echo('mask: {} -> {}{}'.format(file, masked_files, '' if len(masked_files) != 0 else ' | no matches'))
+        click.echo('pattern: {} -> {}{}'.format(file, masked_files, '' if len(masked_files) != 0 else ' | no matches'))
         for f in masked_files:
             result.append(f.replace(self.frm, ''))
         return result
