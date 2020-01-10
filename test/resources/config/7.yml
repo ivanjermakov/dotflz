@@ -5,16 +5,13 @@ dotfiles/:
   b:
     from: b/
     files:
-      - c.html
-      - c.txt
+      - c.*
   c:
     from: c/
     to: c/
     files:
-      - ca/c.html
-      - cd/c.pdf
+      - "**"
   home:
     from: ./
     files:
-      - a.txt
-      - b.xml
+      - "*"

@@ -2,9 +2,17 @@ import unittest
 
 from dotflz.parser import *
 from test import utils
+from test.commons import *
 
 
 class TestParser(unittest.TestCase):
+    PWD = os.getcwd()
+
+    def setUp(self) -> None:
+        os.chdir(TEST_DIR_PATH)
+
+    def tearDown(self) -> None:
+        os.chdir(TestParser.PWD)
 
     def test_not_parse_empty_config(self):
         """
@@ -48,3 +56,8 @@ class TestParser(unittest.TestCase):
         self.assertEqual(2, len(config.items[3].files))
         self.assertEqual('ca/c.html', config.items[2].files[0])
         self.assertEqual('b.xml', config.items[3].files[1])
+
+    def test_parse_config_7(self):
+        config = parse_config(utils.get_config_path(7))
+        self.assertEqual(3, len(config.items[2].files))
+        self.assertEqual(2, len(config.items[3].files))
