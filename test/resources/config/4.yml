@@ -1,4 +1,4 @@
 dotfiles/:
   a:
-    from: a
+    from: a/
     files: []

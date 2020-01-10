@@ -1,6 +1,6 @@
 dotfiles/:
   b:
-    from: b
+    from: b/
     files:
       - c.html
       - c.txt
