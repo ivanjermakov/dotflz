@@ -6,7 +6,6 @@ from dotflz.parser import *
 def _parse_config(config_path):
     click.echo(f'Config file: {config_path}')
     config = parse_config(config_path)
-    click.echo('[\n' + '\n'.join('\t{}'.format(e) for _, e in enumerate(config.items)) + '\n]')
     return config
 
 
@@ -31,7 +30,7 @@ def verify(config_path):
     for entry in config.items:
         are_files_valid.append(entry.is_valid())
     error_count = len(list(filter(lambda e: not e, are_files_valid)))
-    click.echo(f'verification complete with {error_count} error{"" if error_count == 1 else "s"}')
+    click.echo(f'Verification complete with {error_count} error{"" if error_count == 1 else "s"}')
     return error_count
 
 
