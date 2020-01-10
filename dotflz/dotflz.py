@@ -27,7 +27,7 @@ def paste(config_path):
     """
     Replace original files with ones from configured directory according to CONFIG_PATH config file.
     """
-    cli.parse_config(config_path)
+    cli.paste(config_path)
 
 
 @dotflz.command(short_help='Verify configuration file.')
