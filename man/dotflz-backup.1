@@ -1,0 +1,15 @@
+.TH "DOTFLZ BACKUP" "1" "11-Jan-2020" "" "dotflz backup Manual"
+.SH NAME
+dotflz\-backup \- Backup original files into backup directory.
+.SH SYNOPSIS
+.B dotflz backup
+[OPTIONS] CONFIG_PATH
+.SH DESCRIPTION
+Backup original files into backup directory according to CONFIG_PATH config file.
+.SH OPTIONS
+.TP
+\fB\-d,\fP \-\-dir TEXT
+Backup directory name. Timestamp if not specified.
+.TP
+\fB\-c,\fP \-\-clean
+Delete backup directory before copying if such exist.
