@@ -30,7 +30,11 @@ def verify(config_path):
     for entry in config.items:
         are_files_valid.append(entry.is_valid())
     error_count = len(list(filter(lambda e: not e, are_files_valid)))
-    click.echo(f'Verification complete with {error_count} error{"" if error_count == 1 else "s"}')
+    click.echo(
+        'Verification complete with {} error{} for {} file{}'.format(
+            error_count, "" if error_count == 1 else "s", len(config.items), "" if len(config.items) == 1 else "s"
+        )
+    )
     return error_count
 
 
