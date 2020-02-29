@@ -11,6 +11,7 @@ def _parse_config(config_path):
 
 def copy(config_path, clean=False):
     config = _parse_config(config_path)
+    config.make_dirs()
     if clean:
         click.echo(f'Cleaning folder {config.name}')
         delete_file(config.name)
@@ -40,6 +41,7 @@ def verify(config_path):
 
 def backup(config_path, dir, clean):
     config = _parse_config(config_path)
+    config.make_dirs()
     backup_dir_name = dir if dir else datetime.now().strftime('%Y-%m-%dT%H:%M:%S')
     if clean:
         click.echo(f'Cleaning folder {dir}')

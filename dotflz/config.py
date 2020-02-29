@@ -8,6 +8,8 @@ class Config:
     def __init__(self, name, items):
         self.name = name
         self.items = items
+
+    def make_dirs(self):
         os.makedirs(self.name, exist_ok=True)
 
 
@@ -64,7 +66,7 @@ class ConfigItem:
         result = []
         masked_files = glob.glob(file, recursive=True)
         masked_files = list(filter(lambda f: os.path.isfile(f), masked_files))
-        click.echo('pattern: {} -> {}{}'.format(file, masked_files, '' if len(masked_files) != 0 else ' | no matches'))
+        click.echo('Pattern: {} -> {}{}'.format(file, masked_files, '' if len(masked_files) != 0 else ' | no matches'))
         for f in masked_files:
             result.append(f.replace(self.frm, ''))
         return result
