@@ -3,14 +3,14 @@ from datetime import datetime
 from dotflz.parser import *
 
 
-def _parse_config(config_path):
-    click.echo(f'Config file: {config_path}')
-    config = parse_config(config_path)
+def _parse_config(config_path, on):
+    click.echo(f'Config file: {config_path} on {on}')
+    config = parse_config(config_path, on)
     return config
 
 
-def copy(config_path, clean=False):
-    config = _parse_config(config_path)
+def copy(config_path, clean=False, on=os.getcwd()):
+    config = _parse_config(config_path, on)
     config.make_dirs()
     if clean:
         click.echo(f'Cleaning folder {config.name}')
@@ -19,14 +19,14 @@ def copy(config_path, clean=False):
         item.copy()
 
 
-def paste(config_path):
-    config = _parse_config(config_path)
+def paste(config_path, on=os.getcwd()):
+    config = _parse_config(config_path, on)
     for item in config.items:
         item.paste()
 
 
-def verify(config_path):
-    config = _parse_config(config_path)
+def verify(config_path, on=os.getcwd()):
+    config = _parse_config(config_path, on)
     are_files_valid = []
     for entry in config.items:
         are_files_valid.append(entry.is_valid())
@@ -39,8 +39,8 @@ def verify(config_path):
     return error_count
 
 
-def backup(config_path, dir, clean):
-    config = _parse_config(config_path)
+def backup(config_path, dir, clean, on=os.getcwd()):
+    config = _parse_config(config_path, on)
     config.make_dirs()
     backup_dir_name = dir if dir else datetime.now().strftime('%Y-%m-%dT%H:%M:%S')
     if clean:
@@ -51,8 +51,8 @@ def backup(config_path, dir, clean):
             copy_file(item.frm + file, '{}/{}'.format(backup_dir_name, item.to))
 
 
-def restore(config_path, backup_dir_name):
-    config = _parse_config(config_path)
+def restore(config_path, backup_dir_name, on=os.getcwd()):
+    config = _parse_config(config_path, on)
     for item in config.items:
         for file in item.files:
             copy_file('{}/{}{}'.format(backup_dir_name, item.to, file), item.frm)
