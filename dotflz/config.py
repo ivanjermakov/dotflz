@@ -25,7 +25,8 @@ class ConfigItem:
         """
         self.name = name
         self.frm = frm
-        if frm[-1] == '/':
+        if frm[0] == '/':
+            click.echo('Absolute path detected, omitting "on" parameter')
             self.on = ''
         else:
             self.on = os.path.join(on, '')

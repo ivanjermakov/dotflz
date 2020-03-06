@@ -18,6 +18,7 @@ def copy(config_path, clean=False, on=None):
         delete_file(config.name)
     for item in config.items:
         item.copy()
+    click.echo('Copying complete')
 
 
 def paste(config_path, on=None):
@@ -25,6 +26,7 @@ def paste(config_path, on=None):
     config = _parse_config(config_path, on)
     for item in config.items:
         item.paste()
+    click.echo('Pasting complete')
 
 
 def verify(config_path, on=None):
@@ -53,6 +55,7 @@ def backup(config_path, dir, clean, on=None):
     for item in config.items:
         for file in item.files:
             copy_file(item.frm + file, '{}/{}'.format(backup_dir_name, item.to))
+    click.echo('Backup complete')
 
 
 def restore(config_path, backup_dir_name, on=None):
@@ -61,3 +64,4 @@ def restore(config_path, backup_dir_name, on=None):
     for item in config.items:
         for file in item.files:
             copy_file('{}/{}{}'.format(backup_dir_name, item.to, file), item.frm)
+    click.echo('Restore complete')

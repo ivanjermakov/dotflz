@@ -1,5 +1,3 @@
-import json
-
 import yaml
 
 from dotflz.config import *
@@ -18,6 +16,5 @@ def parse_config(path, on):
             files = files_ if isinstance(files_, list) else [files_]
             items.append(ConfigItem(name, on, frm, to, files, config_name))
         config = Config(config_name, items)
-        click.echo(f'Parsed config {path}: \n{json.dumps(config_file, sort_keys=True, indent=4)}')
-        print()
+        click.echo(f'Parsed config {path} with no errors')
         return config

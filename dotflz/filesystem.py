@@ -24,3 +24,14 @@ def copy_file(from_path, to_path):
 def create_directory(path):
     click.echo('Creating directory: {}'.format(path))
     os.makedirs(path, exist_ok=True)
+
+
+def print_tree(path):
+    click.echo('tree:')
+    for root, dirs, files in os.walk(path):
+        level = root.count(os.sep) if os.path.basename(root) else 0
+        indent = '└───' * level
+        click.echo('{}{}/'.format(indent, os.path.basename(root)))
+        subindent = '    ' * (level) + '└───'
+        for f in files:
+            click.echo('{}{}'.format(subindent, f))
