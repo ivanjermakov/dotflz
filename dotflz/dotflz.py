@@ -1,14 +1,31 @@
 import click
+import pkg_resources
 
 from dotflz import cli
 
+VERSION = f'v{pkg_resources.require("dotflz")[0].version}'
+WELCOME_MESSAGE = f"""\
 
-@click.group('dotflz')
-def dotflz():
+          $$\             $$\       $$$$$$\   $$\           
+          $$ |            $$ |     $$  __$$\  $$ |          
+     $$$$$$$ |  $$$$$$\ $$$$$$\    $$ /  \__| $$ |$$$$$$$$\ 
+    $$  __$$ | $$  __$$\\_$$  _|   $$$$\      $$ |\____$$  |
+    $$ /  $$ | $$ /  $$ | $$ |     $$  _|     $$ |  $$$$ _/ 
+    $$ |  $$ | $$ |  $$ | $$ |$$\  $$ |       $$ | $$  _/   
+    \$$$$$$$ | \$$$$$$  | \$$$$  | $$ |       $$ |$$$$$$$$\ 
+     \_______|  \______/   \____/  \__|       \__|\________|
+                                              dotflz {VERSION}
+"""
+
+
+@click.group('dotflz', invoke_without_command=True)
+@click.pass_context
+def dotflz(ctx):
     """
     Utility to keep copies of dotfiles in one place.
     """
-    pass
+    click.echo(WELCOME_MESSAGE)
+    click.echo(ctx.get_help())
 
 
 @dotflz.command(short_help='Copy files by specified configuration file')
