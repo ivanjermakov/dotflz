@@ -24,8 +24,11 @@ class ConfigItem:
         :param config_name: name of config
         """
         self.name = name
-        self.on = on
         self.frm = frm
+        if frm[-1] == '/':
+            self.on = ''
+        else:
+            self.on = os.path.join(on, '')
         self.to = to
         self.files = self._check_pattern(files)
         self.config_name = config_name
