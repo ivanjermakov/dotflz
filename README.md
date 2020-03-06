@@ -8,27 +8,12 @@
 Utility to keep copies of dotfiles in one place
 
 ## Requirements
-Pyhton 3
+Python 3
 
 ## Installation
-
-### With PIP
 ```shell script
 pip install dotflz
 ```
-
-### From source
- 1. Clone repository:
-    ```shell script
-    git clone https://github.com/ivanjermakov/dotflz.git
-    cd dotflz
-    ```
- 2. Mark `bin/dotflz` as executable:
-    ```shell script
-    chmod +x bin/dotflz
-    ```
-
-Optionally add `bin/dotflz` to PATH.
 
 ## Usage
 ````
