@@ -19,7 +19,7 @@ def copy(config_path, clean, on):
     """
     Copy files by according to CONFIG_PATH config file.
     """
-    cli.copy(config_path, clean, *on)
+    cli.copy(config_path, clean, on)
 
 
 @dotflz.command(short_help='Replace original files with ones from configured directory.')
