@@ -20,9 +20,9 @@ def print_tree():
     click.echo('tree:')
     for root, dirs, files in os.walk(DOTFILES_DIR_PATH):
         level = root.count(os.sep) if os.path.basename(root) else 0
-        indent = '└───' * level
+        indent = '└─' * level
         click.echo('{}{}/'.format(indent, os.path.basename(root)))
-        subindent = '    ' * (level) + '└───'
+        subindent = '  ' * (level) + '└─'
         for f in files:
             click.echo('{}{}'.format(subindent, f))
 
@@ -33,6 +33,7 @@ class TestCliCopy(unittest.TestCase):
     def setUp(self) -> None:
         create_directory(DYN_TEST_DIR_PATH)
         os.chdir(DYN_TEST_DIR_PATH)
+        print(os.getcwd())
 
     def tearDown(self) -> None:
         os.chdir(TestCliCopy.PWD)

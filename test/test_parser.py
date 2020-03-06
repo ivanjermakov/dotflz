@@ -38,7 +38,7 @@ class TestParser(unittest.TestCase):
         self.assertEqual(1, len(config.items))
         item = config.items[0]
         self.assertEqual('a', item.name)
-        self.assertEqual('./a/', item.frm)
+        self.assertEqual('a/', item.frm)
         self.assertEqual('a/', item.to)
         self.assertEqual(0, len(item.files))
 
