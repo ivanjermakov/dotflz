@@ -29,17 +29,17 @@ def paste(config_path, on):
     """
     Replace original files with ones from configured directory according to CONFIG_PATH config file.
     """
-    cli.paste(config_path, *on)
+    cli.paste(config_path, on)
 
 
 @dotflz.command(short_help='Verify configuration file.')
 @click.argument('config_path')
-@click.option('-o', '---on', help='Context path for relative configuration "from" paths')
+@click.option('-o', '--on', help='Context path for relative configuration "from" paths')
 def verify(config_path, on):
     """
     Verify configuration file from CONFIG_PATH.
     """
-    error_count = cli.verify(config_path, *on)
+    error_count = cli.verify(config_path, on)
     if error_count != 0:
         exit(1)
 
@@ -53,7 +53,7 @@ def backup(config_path, dir, clean, on):
     """
     Backup original files into backup directory according to CONFIG_PATH config file.
     """
-    cli.backup(config_path, dir, clean, *on)
+    cli.backup(config_path, dir, clean, on)
 
 
 @dotflz.command(short_help='Restore original files with specified backup directory.')
@@ -64,4 +64,4 @@ def restore(config_path, backup_dir_name, on):
     """
     Restore original files from BACKUP_DIR_NAME according to CONFIG_PATH config file.
     """
-    cli.restore(config_path, backup_dir_name, *on)
+    cli.restore(config_path, backup_dir_name, on)

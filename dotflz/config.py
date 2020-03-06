@@ -14,7 +14,7 @@ class Config:
 
 
 class ConfigItem:
-    def __init__(self, name, frm, to, files, config_name):
+    def __init__(self, name, on, frm, to, files, config_name):
         """
         Constructor
         :param name: configuration item name
@@ -24,27 +24,28 @@ class ConfigItem:
         :param config_name: name of config
         """
         self.name = name
+        self.on = on
         self.frm = frm
         self.to = to
         self.files = self._check_pattern(files)
         self.config_name = config_name
 
     def __repr__(self):
-        return f'{self.name}: {self.frm} -> {self.to} | {self.files}'
+        return f'{self.name}: {self.on}>{self.frm} -> {self.to} | {self.files}'
 
     def copy(self):
         create_directory(self.config_name + self.to)
         for f in self.files:
-            copy_file(self.frm + f, self.config_name + self.to)
+            copy_file(self.on + self.frm + f, self.config_name + self.to)
 
     def paste(self):
         for f in self.files:
-            copy_file(self.config_name + self.to + f, self.frm)
+            copy_file(self.config_name + self.to + f, self.on + self.frm)
 
     def is_valid(self):
         are_files_exist = []
         for f in self.files:
-            full_f_path = self.frm + f
+            full_f_path = self.on + self.frm + f
             is_f_exists = os.path.exists(full_f_path)
             if not is_f_exists:
                 click.echo(f'File {full_f_path} does not exist')
@@ -56,7 +57,7 @@ class ConfigItem:
         for f in files:
             result = list(itertools.chain(
                 result,
-                self._find_by_pattern(self.frm + f)
+                self._find_by_pattern(f)
             ))
         # remove duplicates
         result = list(sorted(set(result), key=result.index))
@@ -64,9 +65,10 @@ class ConfigItem:
 
     def _find_by_pattern(self, file):
         result = []
-        masked_files = glob.glob(file, recursive=True)
+        masked_files = glob.glob(self.on + self.frm + file, recursive=True)
         masked_files = list(filter(lambda f: os.path.isfile(f), masked_files))
-        click.echo('Pattern: {} -> {}{}'.format(file, masked_files, '' if len(masked_files) != 0 else ' | no matches'))
+        click.echo('Pattern: {} -> {}{}'.format(self.frm + file, masked_files,
+                                                '' if len(masked_files) != 0 else ' | no matches'))
         for f in masked_files:
-            result.append(f.replace(self.frm, ''))
+            result.append(f.replace(self.on + self.frm, ''))
         return result

@@ -9,7 +9,8 @@ def _parse_config(config_path, on):
     return config
 
 
-def copy(config_path, clean=False, on=os.getcwd()):
+def copy(config_path, clean=False, on=None):
+    on = on if on else os.getcwd()
     config = _parse_config(config_path, on)
     config.make_dirs()
     if clean:
@@ -19,13 +20,15 @@ def copy(config_path, clean=False, on=os.getcwd()):
         item.copy()
 
 
-def paste(config_path, on=os.getcwd()):
+def paste(config_path, on=None):
+    on = on if on else os.getcwd()
     config = _parse_config(config_path, on)
     for item in config.items:
         item.paste()
 
 
-def verify(config_path, on=os.getcwd()):
+def verify(config_path, on=None):
+    on = on if on else os.getcwd()
     config = _parse_config(config_path, on)
     are_files_valid = []
     for entry in config.items:
@@ -39,7 +42,8 @@ def verify(config_path, on=os.getcwd()):
     return error_count
 
 
-def backup(config_path, dir, clean, on=os.getcwd()):
+def backup(config_path, dir, clean, on=None):
+    on = on if on else os.getcwd()
     config = _parse_config(config_path, on)
     config.make_dirs()
     backup_dir_name = dir if dir else datetime.now().strftime('%Y-%m-%dT%H:%M:%S')
@@ -51,7 +55,8 @@ def backup(config_path, dir, clean, on=os.getcwd()):
             copy_file(item.frm + file, '{}/{}'.format(backup_dir_name, item.to))
 
 
-def restore(config_path, backup_dir_name, on=os.getcwd()):
+def restore(config_path, backup_dir_name, on=None):
+    on = on if on else os.getcwd()
     config = _parse_config(config_path, on)
     for item in config.items:
         for file in item.files:
