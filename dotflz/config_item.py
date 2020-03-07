@@ -24,7 +24,7 @@ class ConfigItem:
         """
         self.name = name
         self.frm = frm
-        if frm[0] == '/':
+        if frm and frm[0] == '/':
             click.echo('Absolute path detected, omitting "on" parameter')
             self.on = ''
         else:
@@ -47,7 +47,7 @@ class ConfigItem:
         """
         create_directory(self.config_name + self.to)
         for f in self.files:
-            copy_file(self.on + self.frm + f, self.config_name + self.to)
+            copy_file(self.on + self.frm + f, self.config_name + self.to + os.path.dirname(f))
 
     def paste(self) -> None:
         """

@@ -37,7 +37,8 @@ def copy_file(from_path: str, to_path: str) -> None:
     """
     click.echo('Copying file: {} -> {}'.format(from_path, to_path))
     os.makedirs(to_path, exist_ok=True)
-    subprocess.run(['bash', '-c', " ".join(['cp', from_path, to_path])])
+    # TODO: fix recursiveness since it can cause untracked files being copied
+    subprocess.run(['bash', '-c', " ".join(['cp', '-r', from_path, to_path])])
 
 
 def create_directory(path: str) -> None:
