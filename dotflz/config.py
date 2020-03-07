@@ -29,7 +29,7 @@ class Config:
         os.makedirs(self.name, exist_ok=True)
 
     @staticmethod
-    def parse(path: str, on: str) -> 'Config':
+    def parse(path: str, on: str, keep_globs: bool = False) -> 'Config':
         with open(path, 'r') as stream:
             items = []
             config_file = yaml.safe_load(stream)
@@ -40,7 +40,7 @@ class Config:
                 to = os.path.expanduser(item_config['to']) if item_config.get('to') else name + '/'
                 files_ = item_config['files']
                 files = files_ if isinstance(files_, list) else [files_]
-                items.append(ConfigItem(name, on, frm, to, files, config_name))
+                items.append(ConfigItem(name, on, frm, to, files, config_name, keep_globs))
             config = Config(config_name, items)
             click.echo(f'Parsed config {path} with no errors')
             return config

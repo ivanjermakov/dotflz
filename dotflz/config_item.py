@@ -10,7 +10,8 @@ class ConfigItem:
     Describe single `Config` instance.
     """
 
-    def __init__(self, name: str, on: str, frm: str, to: str, files: List[str], config_name: str) -> None:
+    def __init__(self, name: str, on: str, frm: str, to: str, files: List[str], config_name: str,
+                 keep_globs: bool = False) -> None:
         """
         Constructor.
 
@@ -19,6 +20,7 @@ class ConfigItem:
         :param to: destination directory
         :param files: list of source files within source directory
         :param config_name: name of config
+        :param keep_globs: if true, globs wont be compiled to real files
         """
         self.name = name
         self.frm = frm
@@ -28,7 +30,7 @@ class ConfigItem:
         else:
             self.on = os.path.join(on, '')
         self.to = to
-        self.files = self._compile_patterns(files)
+        self.files = files if keep_globs else self._compile_patterns(files)
         self.config_name = config_name
 
     def __repr__(self) -> str:
@@ -72,7 +74,7 @@ class ConfigItem:
 
     def _compile_patterns(self, files: List[str]) -> List[str]:
         """
-        Compile glob pattern to real files.
+        Compile glob patterns to real files.
         :param files: list of glob patterns
         :return: list of compilation result files
         """

@@ -4,9 +4,9 @@ from dotflz.config import Config
 from dotflz.filesystem import *
 
 
-def _parse_config(config_path: str, on: str) -> Config:
+def _parse_config(config_path: str, on: str, keep_globs: bool = False) -> Config:
     click.echo(f'Config file: {config_path} on {on}')
-    config = Config.parse(config_path, on)
+    config = Config.parse(config_path, on, keep_globs)
     return config
 
 
@@ -24,7 +24,7 @@ def copy(config_path: str, clean: bool = False, on: str = None) -> None:
 
 def paste(config_path: str, on: str = None) -> None:
     on = on if on else os.getcwd()
-    config = _parse_config(config_path, on)
+    config = _parse_config(config_path, on, keep_globs=True)
     for item in config.items:
         item.paste()
     click.echo('Pasting complete')
@@ -61,7 +61,7 @@ def backup(config_path: str, dir: str, clean: bool, on: str = None) -> None:
 
 def restore(config_path: str, backup_dir_name: str, on: str = None) -> None:
     on = on if on else os.getcwd()
-    config = _parse_config(config_path, on)
+    config = _parse_config(config_path, on, keep_globs=True)
     for item in config.items:
         for file in item.files:
             copy_file('{}/{}{}'.format(backup_dir_name, item.to, file), item.frm)
