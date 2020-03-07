@@ -1,5 +1,7 @@
 language: python
 cache: pip
+before_install:
+  - sudo apt install tree
 install:
   - pip install .
   - pip install codecov
