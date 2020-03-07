@@ -2,7 +2,7 @@ import unittest
 
 from dotflz.cli import *
 from test.commons import *
-from test.test_utils import get_config_path, count_files
+from test.test_utils import get_config_path, count_files, tree
 
 DOTFILES_DIR_PATH = 'dotfiles/'
 ON = '../test_dir'
@@ -43,4 +43,5 @@ class TestCliPaste(unittest.TestCase):
         copy(get_config_path(config_num), on=ON)
         self.assertEqual(expect_files, count_files(os.getcwd()))
         paste(get_config_path(config_num), on=PASTE_ON)
+        tree()
         self.assertEqual(expect_files, count_files(PASTE_ON))

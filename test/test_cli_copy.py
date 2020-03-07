@@ -2,21 +2,10 @@ import unittest
 
 from dotflz.cli import *
 from test.commons import *
-from test.test_utils import get_config_path, count_files
+from test.test_utils import *
 
 DOTFILES_DIR_PATH = 'dotfiles/'
 ON = '../test_dir'
-
-
-def print_tree():
-    click.echo('tree:')
-    for root, dirs, files in os.walk(DOTFILES_DIR_PATH):
-        level = root.count(os.sep) if os.path.basename(root) else 0
-        indent = '└─' * level
-        click.echo('{}{}/'.format(indent, os.path.basename(root)))
-        subindent = '  ' * (level) + '└─'
-        for f in files:
-            click.echo('{}{}'.format(subindent, f))
 
 
 class TestCliCopy(unittest.TestCase):
@@ -77,5 +66,5 @@ class TestCliCopy(unittest.TestCase):
 
     def _test_copy(self, config_num, expect_files, clean=False):
         copy(get_config_path(config_num), clean, on=ON)
-        print_tree()
+        tree()
         self.assertEqual(expect_files, count_files(DOTFILES_DIR_PATH))
