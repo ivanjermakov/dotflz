@@ -11,7 +11,7 @@ Utility to keep copies of dotfiles in one place
 Python 3
 
 ## Installation
-```shell script
+```
 pip install dotflz
 ```
 
