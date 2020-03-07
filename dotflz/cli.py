@@ -1,15 +1,16 @@
 from datetime import datetime
 
-from dotflz.parser import *
+from dotflz.config import Config
+from dotflz.filesystem import *
 
 
-def _parse_config(config_path, on):
+def _parse_config(config_path: str, on: str) -> Config:
     click.echo(f'Config file: {config_path} on {on}')
-    config = parse_config(config_path, on)
+    config = Config.parse(config_path, on)
     return config
 
 
-def copy(config_path, clean=False, on=None):
+def copy(config_path: str, clean: bool = False, on: str = None) -> None:
     on = on if on else os.getcwd()
     config = _parse_config(config_path, on)
     config.make_dirs()
@@ -21,7 +22,7 @@ def copy(config_path, clean=False, on=None):
     click.echo('Copying complete')
 
 
-def paste(config_path, on=None):
+def paste(config_path: str, on: str = None) -> None:
     on = on if on else os.getcwd()
     config = _parse_config(config_path, on)
     for item in config.items:
@@ -29,7 +30,7 @@ def paste(config_path, on=None):
     click.echo('Pasting complete')
 
 
-def verify(config_path, on=None):
+def verify(config_path: str, on: str = None) -> int:
     on = on if on else os.getcwd()
     config = _parse_config(config_path, on)
     are_files_valid = []
@@ -44,7 +45,7 @@ def verify(config_path, on=None):
     return error_count
 
 
-def backup(config_path, dir, clean, on=None):
+def backup(config_path: str, dir: str, clean: bool, on: str = None) -> None:
     on = on if on else os.getcwd()
     config = _parse_config(config_path, on)
     config.make_dirs()
@@ -58,7 +59,7 @@ def backup(config_path, dir, clean, on=None):
     click.echo('Backup complete')
 
 
-def restore(config_path, backup_dir_name, on=None):
+def restore(config_path: str, backup_dir_name: str, on: str = None) -> None:
     on = on if on else os.getcwd()
     config = _parse_config(config_path, on)
     for item in config.items:

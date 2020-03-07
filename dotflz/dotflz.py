@@ -20,7 +20,7 @@ WELCOME_MESSAGE = f"""\
 
 @click.group('dotflz', invoke_without_command=True)
 @click.pass_context
-def dotflz(ctx):
+def dotflz(ctx: click.Context) -> None:
     """
     Utility to keep copies of dotfiles in one place.
     """
@@ -32,7 +32,7 @@ def dotflz(ctx):
 @click.argument('config_path')
 @click.option('-c', '--clean', is_flag=True, help='Delete files missing from config file.')
 @click.option('-o', '--on', help='Context path for relative configuration "from" paths')
-def copy(config_path, clean, on):
+def copy(config_path: str, clean: bool, on: str) -> None:
     """
     Copy files by according to CONFIG_PATH config file.
     """
@@ -42,7 +42,7 @@ def copy(config_path, clean, on):
 @dotflz.command(short_help='Replace original files with ones from configured directory.')
 @click.argument('config_path')
 @click.option('-o', '--on', help='Context path for relative configuration "from" paths')
-def paste(config_path, on):
+def paste(config_path: str, on: str) -> None:
     """
     Replace original files with ones from configured directory according to CONFIG_PATH config file.
     """
@@ -52,7 +52,7 @@ def paste(config_path, on):
 @dotflz.command(short_help='Verify configuration file.')
 @click.argument('config_path')
 @click.option('-o', '--on', help='Context path for relative configuration "from" paths')
-def verify(config_path, on):
+def verify(config_path: str, on: str) -> None:
     """
     Verify configuration file from CONFIG_PATH.
     """
@@ -66,7 +66,7 @@ def verify(config_path, on):
 @click.option('-d', '--dir', help='Backup directory name. Timestamp if not specified.')
 @click.option('-c', '--clean', is_flag=True, help='Delete backup directory before copying if such exist.')
 @click.option('-o', '--on', help='Context path for relative configuration "from" paths')
-def backup(config_path, dir, clean, on):
+def backup(config_path: str, dir: str, clean: bool, on: str) -> None:
     """
     Backup original files into backup directory according to CONFIG_PATH config file.
     """
@@ -77,7 +77,7 @@ def backup(config_path, dir, clean, on):
 @click.argument('config_path')
 @click.argument('backup_dir_name')
 @click.option('-o', '--on', help='Context path for relative configuration "from" paths')
-def restore(config_path, backup_dir_name, on):
+def restore(config_path: str, backup_dir_name: str, on: str) -> None:
     """
     Restore original files from BACKUP_DIR_NAME according to CONFIG_PATH config file.
     """

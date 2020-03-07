@@ -1,7 +1,6 @@
 import unittest
 
 from dotflz.cli import *
-from dotflz.parser import *
 from test.commons import *
 
 
