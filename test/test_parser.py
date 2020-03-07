@@ -19,17 +19,11 @@ class TestParser(unittest.TestCase):
     def tearDown(self) -> None:
         os.chdir(TestParser.PWD)
 
-    def test_not_parse_empty_config(self):
-        """
-        Parse configuration file 1
-        """
+    def test_parse_config_1_empty(self):
         with self.assertRaises(AttributeError):
             Config.parse(get_config_path(1), TestParser.ON)
 
-    def test_parse_empty_valid_config(self):
-        """
-        Parse configuration file 2
-        """
+    def test_parse_config_2_empty_valid(self):
         config = Config.parse(get_config_path(2), TestParser.ON)
         self.assertEqual('dotfiles/', config.name)
         self.assertEqual(0, len(config.items))
