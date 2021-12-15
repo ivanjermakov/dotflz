@@ -16,7 +16,7 @@ setup(
     long_description=long_description,
     long_description_content_type='text/markdown',
     python_requires='>=3',
-    install_requires=['wheel', 'pyyaml', 'glob3', 'more-itertools', 'datetime', 'click'],
+    install_requires=['wheel', 'pyyaml', 'glob2', 'more-itertools', 'datetime', 'click'],
     entry_points='''
         [console_scripts]
         dotflz=dotflz.dotflz:dotflz
